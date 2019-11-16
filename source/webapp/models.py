@@ -28,11 +28,11 @@ class Services(models.Model):
 
 
 REVIEW_CHOICES = (
-    ('excellent', '5'),
-    ('good', '4'),
-    ('so-so', '3'),
-    ('bad', '2'),
-    ('awfully', '1')
+    (5, 'excellent'),
+    (4, 'good'),
+    (3, 'so-so'),
+    (2, 'bad'),
+    (1, 'awfully')
 )
 
 
@@ -44,7 +44,7 @@ class Review(models.Model):
     rating = models.IntegerField(choices=REVIEW_CHOICES, verbose_name='Оценка')
 
     def __str__(self):
-        return self.author
+        return str(self.author_id)
 
     class Meta:
         verbose_name = 'Отзыв'

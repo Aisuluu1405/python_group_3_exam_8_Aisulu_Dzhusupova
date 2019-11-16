@@ -1,0 +1,60 @@
+[
+{
+  "model": "webapp.services",
+  "pk": 1,
+  "fields": {
+    "name": "\u0414\u0435\u043f\u043e\u0437\u0438\u0442\u044b",
+    "category": "individuals",
+    "photo": "",
+    "description": "\u041e\u0431\u0441\u043b\u0443\u0436\u0438\u0432\u0430\u043d\u0438\u0435 \u043f\u043e \u0441\u0447\u0435\u0442\u0430\u043c \u0444\u0438\u0437\u0438\u0447\u0435\u0441\u043a\u0438\u0445 \u043b\u0438\u0446."
+  }
+},
+{
+  "model": "webapp.services",
+  "pk": 2,
+  "fields": {
+    "name": "\u0421\u0435\u0439\u0444\u043e\u0432\u044b\u0435 \u044f\u0447\u0435\u0439\u043a\u0438",
+    "category": "legal entities",
+    "photo": "",
+    "description": "\u041e\u0431\u0441\u043b\u0443\u0436\u0438\u0432\u0430\u043d\u0438\u0435 \u043f\u043e \u0441\u0435\u0439\u0444\u043e\u0432\u044b\u043c \u044f\u0447\u0435\u0439\u043a\u0430\u043c \u044e\u0440\u0438\u0434\u0438\u0447\u0435\u0441\u043a\u0438\u0445 \u043b\u0438\u0446."
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 1,
+  "fields": {
+    "password": "pbkdf2_sha256$150000$tW6v3A4pZiRW$DQxZYxHUBbNJCFylQdSeh3nZrTpMySBLjBEz/HWRf3Y=",
+    "last_login": "2019-11-16T06:45:34.211Z",
+    "is_superuser": true,
+    "username": "admin",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2019-11-16T03:18:57.142Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "webapp.review",
+  "pk": 1,
+  "fields": {
+    "author": 1,
+    "service": 1,
+    "text": "\u041e\u0431\u0441\u043b\u0443\u0436\u0438\u0432\u0430\u043d\u0438\u0435 \u043e\u0442\u043b\u0438\u0447\u043d\u043e\u0435!",
+    "rating": 5
+  }
+},
+{
+  "model": "webapp.review",
+  "pk": 2,
+  "fields": {
+    "author": 1,
+    "service": 2,
+    "text": "\u0421\u043b\u0438\u0448\u043a\u043e\u043c \u0434\u043e\u043b\u0433\u043e \u043e\u0431\u0441\u043b\u0443\u0436\u0438\u0432\u0430\u044e\u0442",
+    "rating": 2
+  }
+}
+]
