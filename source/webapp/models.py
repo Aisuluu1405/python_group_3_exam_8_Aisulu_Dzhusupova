@@ -1,4 +1,5 @@
-from django.conf import settings
+# from django.conf import settings
+# from django.contrib.auth.models import User
 from django.contrib.auth.models import User
 from django.db import models
 
@@ -38,7 +39,7 @@ REVIEW_CHOICES = (
 
 class Review(models.Model):
     author = models.ForeignKey(User, related_name='user_review', on_delete=models.PROTECT, verbose_name='Автор')
-    service = models.ForeignKey('webapp.Services', related_name='service_review', on_delete=models.PROTECT,
+    service = models.ForeignKey('webapp.Services', related_name='service_review', on_delete=models.CASCADE,
                                     verbose_name='Услуга')
     text = models.TextField(max_length=1000, verbose_name='Текст отзыва')
     rating = models.IntegerField(choices=REVIEW_CHOICES, verbose_name='Оценка')
