@@ -129,3 +129,5 @@ MEDIA_ROOT = 'uploads'
 
 LOGIN_REDIRECT_URL = reverse_lazy('webapp:index')
 LOGOUT_REDIRECT_URL = reverse_lazy('webapp:index')
+
+from .settings_local import *
