@@ -16,7 +16,8 @@
     {% else %}
         <img class="avatar" src="{% static "default-avatar.jpg" %}" alt="No avatar!" />
     {% endif %}
-    <p>First Name: <b>{{ user_obj.first_name }}</b></p>
-    <p>Last Name: <b>{{ user_obj.last_name }}</b></p>
+    <p>Имя: <b>{{ user_obj.first_name }}</b></p>
+    <p>Фамилия: <b>{{ user_obj.last_name }}</b></p>
     <p>Email: <b>{{ user_obj.email }}</b></p>
+    <h3><b>Отзывы пользователя: </b></h3>
 {% endblock %}

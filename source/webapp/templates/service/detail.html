@@ -30,10 +30,10 @@
     <div class="review-list">
         {% for review in reviews %}
             <div class="review">
-                <p><b>{{ forloop.counter }}. {{ review.author.username }}</b></p>
+                <p><a href="{% url 'accounts:user_detail' review.author.pk %}"> <b>{{ forloop.counter }}. {{ review.author.username }}</b></a></p>
                 <p><b>Email: </b>{{ review.author.email }}</p>
                 <div class="pre"><b>Отзыв: </b> {{ review.text }}</div>
-                <div><b>Rating:</b> {{ review.rating }} из возможных 5</div>
+                <div><b>Оценка:</b> {{ review.rating }} из возможных 5</div>
                 <hr>
 
             {% if review.author == request.user%}
