@@ -1,4 +1,4 @@
-from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin, PermissionRequiredMixin
 from django.shortcuts import  get_object_or_404, redirect
 from django.urls import reverse
 from django.views.generic import ListView, DeleteView, UpdateView, CreateView
@@ -23,21 +23,25 @@ class ReviewForServiceCreateView(CreateView):
         return redirect('webapp:service_detail', pk=services_pk)
 
 
-class ReviewEditView(UpdateView):
+class ReviewEditView(PermissionRequiredMixin,UpdateView):
     model = Review
     template_name = 'review/edit.html'
     form_class = ServiceReviewForm
     context_object_name = 'review'
+    permission_required = 'webapp.change_review'
+    permission_denied_message = "Доступ запрещен!"
 
     def get_success_url(self):
-        return reverse('webapp:service_detail', kwargs={'pk': self.object.service.pk})
+        return reverse('webapp:service_detail', kwargs={'pk': self.object.services.pk})
 
 
-class ReviewDeleteView(DeleteView):
+class ReviewDeleteView(PermissionRequiredMixin, DeleteView):
     model = Review
+    permission_required = 'webapp.delete_review'
+    permission_denied_message = "Доступ запрещен!"
 
     def get(self, request, *args, **kwargs):
         return self.delete(request, *args, **kwargs)
 
     def get_success_url(self):
-        return reverse('webapp:service_detail', kwargs={'pk': self.object.service.pk})
+        return reverse('webapp:service_detail', kwargs={'pk': self.object.services.pk})

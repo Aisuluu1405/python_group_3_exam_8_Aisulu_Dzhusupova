@@ -37,31 +37,32 @@ class ServicesView(DetailView):
         context['is_paginated'] = page.has_other_pages()
 
 
-
-class ServicesCreateView(CreateView):
+class ServicesCreateView(PermissionRequiredMixin, CreateView):
     model = Services
     template_name = 'service/create.html'
     fields = ('name', 'category', 'description', 'photo')
     success_url = reverse_lazy('webapp:index')
-    # permission_required = 'webapp.add_services'
-    # permission_denied_message = "Доступ запрещен"
+    permission_required = 'webapp.add_services'
+    permission_denied_message = "Доступ запрещен!"
 
 
-class ServicesEditView(UpdateView):
+class ServicesEditView(PermissionRequiredMixin, UpdateView):
     template_name = 'service/edit.html'
     model = Services
     fields = ('name', 'category', 'description', 'photo')
     context_object_name = 'services'
+    permission_required = 'webapp.change_services'
+    permission_denied_message = "Доступ запрещен!"
 
     def get_success_url(self):
         return reverse('webapp:index')
 
 
-class ServicesDeleteView(DeleteView):
+class ServicesDeleteView(PermissionRequiredMixin, DeleteView):
     model = Services
     template_name = 'service/delete.html'
     context_object_name = 'services'
     success_url = reverse_lazy('webapp:index')
-    # permission_required = 'webapp.delete_services'
-    # permission_denied_message = 'Access is denied!'
+    permission_required = 'webapp.delete_services'
+    permission_denied_message = 'Доступ запрещен!'
 

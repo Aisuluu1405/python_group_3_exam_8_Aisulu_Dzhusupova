@@ -2,10 +2,12 @@
 {% load static %}
 {% block title %}{{ services.name }}{% endblock %}
 {% block menu %}
-{#{% if perms.webapp.changes_services %}#}
+    {% if perms.webapp.changes_services %}
         <li class="nav-item"><a href="{% url 'webapp:service_edit' services.pk %}" class="nav-link">Редактировать услугу</a></li>
-{#    {% endif %}#}
+    {% endif %}
+    {% if perms.webapp.delete_services %}
         <li class="nav-item"><a href="{% url 'webapp:service_delete' services.pk %}" class="nav-link">Удалить услугу</a></li>
+    {% endif %}
 {% endblock %}
 {% block content %}
     <div class="text-center">
@@ -36,8 +38,12 @@
 
             {% if review.author == request.user%}
                 <p class="review-links">
-                    <a href="{% url 'webapp:review_update' review.pk %}">Редактировать</a>
-                    <a href="{% url 'webapp:review_delete' review.pk %}">Удалить</a>
+                    {% if perms.webapp.changes_review %}
+                        <a href="{% url 'webapp:review_update' review.pk %}">Редактировать</a>
+                    {% endif %}
+                    {% if perms.webapp.delete_review %}
+                        <a href="{% url 'webapp:review_delete' review.pk %}">Удалить</a>
+                    {% endif %}
                 </p>
             {% endif %}
             </div>

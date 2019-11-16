@@ -1,9 +1,9 @@
 {% extends 'base.html' %}
 {% block title %}Услуги{% endblock %}
 {% block menu %}
-{#    {% if perms.webapp.add_services %}#}
+    {% if perms.webapp.add_services %}
         <li class="nav-item"><a href="{% url 'webapp:service_create' %}" class="nav-link">Добавить услугу</a></li>
-{#    {% endif %}#}
+    {% endif %}
 
 
 {% endblock %}
