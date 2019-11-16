@@ -1,6 +1,11 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block title %}{{ services.name }}{% endblock %}
+{% block menu %}
+{#{% if perms.webapp.changes_services %}#}
+        <li class="nav-item"><a href="{% url 'webapp:service_edit' services.pk %}" class="nav-link">Редактировать услугу</a></li>
+{#    {% endif %}#}
+{% endblock %}
 {% block content %}
     <div class="text-center">
         <h1>{{ services.name }}</h1>

@@ -1,8 +1,8 @@
-from django.contrib.auth.mixins import PermissionRequiredMixin
+from django.contrib.auth.mixins import PermissionRequiredMixin, LoginRequiredMixin
 from django.shortcuts import reverse, redirect
 from django.urls import reverse_lazy
 
-from django.views.generic import ListView, DetailView, CreateView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView
 from webapp.models import Services
 
 
@@ -25,3 +25,13 @@ class ServicesCreateView(CreateView):
     success_url = reverse_lazy('webapp:index')
     # permission_required = 'webapp.add_services'
     # permission_denied_message = "Доступ запрещен"
+
+
+class ServicesEditView(UpdateView):
+    template_name = 'service/edit.html'
+    model = Services
+    fields = ('name', 'category', 'description', 'photo')
+    context_object_name = 'services'
+
+    def get_success_url(self):
+        return reverse('webapp:index')
