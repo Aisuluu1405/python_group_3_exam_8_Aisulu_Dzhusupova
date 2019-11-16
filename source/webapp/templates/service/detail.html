@@ -5,7 +5,9 @@
         <h1>{{ services.name }}</h1>
         <div class="row">
             <div class="col col-12 col-sm-10 col-md-8 col-lg-6 m-auto">
-                <img src="{{ services.photo.url }}" class="img-fluid" alt="{{ services.name }}">
+                {% if services.photo %}
+                    <img src="{{ services.photo.url }}" class="img-fluid" alt="{{ services.name }}">
+                {% endif %}
             </div>
         </div>
         <p><b>Категория:</b> {{ services.get_category_display }}</p>

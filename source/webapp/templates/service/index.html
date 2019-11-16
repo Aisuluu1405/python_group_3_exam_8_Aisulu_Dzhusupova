@@ -11,8 +11,9 @@
         {% for services in services_list%}
             <div class="col col-3">
                 <div class="card">
-
-                    <img src="{{ services.photo.url }}" class="card-img-top" alt="{{ services.name }}">
+                    {% if services.photo %}
+                        <img src="{{ services.photo.url }}" class="card-img-top" alt="{{ services.name }}">
+                    {% endif %}
                     <div class="card-body">
                         <h5 class="card-title">{{ services.name }}</h5>
                         <p class="card-text">{{ services.get_category_display }}</p>
