@@ -38,7 +38,7 @@
 
             {% if review.author == request.user%}
                 <p class="review-links">
-                    {% if perms.webapp.changes_review %}
+                    {% if perms.webapp.change_review %}
                         <a href="{% url 'webapp:review_update' review.pk %}">Редактировать</a>
                     {% endif %}
                     {% if perms.webapp.delete_review %}

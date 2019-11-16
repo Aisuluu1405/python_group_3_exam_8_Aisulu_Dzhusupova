@@ -37,7 +37,7 @@ class ReviewEditView(PermissionRequiredMixin,UserPassesTestMixin, UpdateView):
         return self.request.user == review.author or self.request.user.has_perm('webapp.change_review')
 
     def get_success_url(self):
-        return reverse('webapp:service_detail', kwargs={'pk': self.object.services.pk})
+        return reverse('webapp:service_detail', kwargs={'pk': self.object.service.pk})
 
 
 class ReviewDeleteView(PermissionRequiredMixin,UserPassesTestMixin, DeleteView):
@@ -54,4 +54,4 @@ class ReviewDeleteView(PermissionRequiredMixin,UserPassesTestMixin, DeleteView):
         return self.delete(request, *args, **kwargs)
 
     def get_success_url(self):
-        return reverse('webapp:service_detail', kwargs={'pk': self.object.services.pk})
+        return reverse('webapp:service_detail', kwargs={'pk': self.object.service.pk})
