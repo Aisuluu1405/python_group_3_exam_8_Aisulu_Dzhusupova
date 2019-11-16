@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block title %}{{ services.name }}{% endblock %}
 {% block content %}
     <div class="text-center">
@@ -7,6 +8,8 @@
             <div class="col col-12 col-sm-10 col-md-8 col-lg-6 m-auto">
                 {% if services.photo %}
                     <img src="{{ services.photo.url }}" class="img-fluid" alt="{{ services.name }}">
+                {% else %}
+                    <img class="foto" src="{% static 'fotodefault.jpg' %}" alt="No foto!" />
                 {% endif %}
             </div>
         </div>
