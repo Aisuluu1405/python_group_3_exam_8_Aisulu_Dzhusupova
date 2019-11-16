@@ -9,6 +9,7 @@
 {% endblock %}
 {% block content %}
     <h1 class="text-center">Услуги</h1>
+
     <div class="row">
         {% for services in services_list%}
             <div class="col col-3">
@@ -21,7 +22,6 @@
                         <p class="card-text">{{ services.get_category_display }}</p>
                         <a href="{% url "webapp:service_detail" services.pk %}"
                            class="btn btn-primary">Посмотреть</a>
-
                     </div>
                 </div>
             </div>

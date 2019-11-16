@@ -5,7 +5,7 @@
     <h1>Вы действительно хотить удалить услугу "{{services}}"?</h1>
     <form method="POST" action="{% url 'webapp:service_delete' services.pk %}" class="text-center">
         {% csrf_token %}
-        <p><input type="submit" value="Да"></p>
-        <p><a href="{% url "webapp:service_detail" services.pk %}">Нет, выход</a></p>
+        <p><input type="submit" value="Да" class="btn btn-primary"></p>
+        <p><a href="{% url "webapp:service_detail" services.pk %}" class="btn btn-primary">Нет, выход</a></p>
     </form>
 {% endblock %}

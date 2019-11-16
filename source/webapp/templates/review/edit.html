@@ -3,7 +3,6 @@
 {% block content %}
     <h2>Редактировать отзыв</h2>
     <form method="POST" action="{% url "webapp:review_update" review.pk %}" enctype="multipart/form-data">
-        {% include 'partial/form.html' %}
-        <input type="submit" value="Редактировать" class="btn btn-primary">
+        {% include 'partial/form.html' with button_text='Редактировать'%}
     </form>
 {% endblock %}

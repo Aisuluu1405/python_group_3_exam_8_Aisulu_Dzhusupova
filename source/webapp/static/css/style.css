@@ -30,3 +30,12 @@ body{
     height: auto;
     margin-right: 50px;
 }
+.btn{
+    font-size: 15px;
+    border-radius: 7px;
+    width: 150px;
+    font-weight: bold;
+    margin: 40px 10px 0 0;
+    color: black;
+
+}

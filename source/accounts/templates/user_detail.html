@@ -10,7 +10,7 @@
 {% endblock %}
 
 {% block content %}
-    <h1>Profile: {{ user_obj.username }}</h1>
+    <h1>Личный кабинет: {{ user_obj.username }}</h1>
     {% if user_obj.user_profiles.avatar %}
         <img class="avatar" src="{{ user_obj.user_profiles.avatar.url }}" alt="user picture">
     {% else %}
@@ -19,5 +19,5 @@
     <p>Имя: <b>{{ user_obj.first_name }}</b></p>
     <p>Фамилия: <b>{{ user_obj.last_name }}</b></p>
     <p>Email: <b>{{ user_obj.email }}</b></p>
-    <h3><b>Отзывы пользователя: </b></h3>
+
 {% endblock %}

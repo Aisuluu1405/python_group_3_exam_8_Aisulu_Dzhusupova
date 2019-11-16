@@ -56,7 +56,7 @@ class UserChangeForm(forms.ModelForm):
     email = forms.EmailField(label='Email', required=True)
 
     def get_initial_for_field(self, field, field_name):
-        if field_name in self.Meta.user_profile_fields:
+        if field_name in self.Meta.profile_fields:
             return getattr(self.instance.user_profiles, field_name)
         return super().get_initial_for_field(field, field_name)
 
@@ -67,7 +67,7 @@ class UserChangeForm(forms.ModelForm):
 
     def save_profile(self, commit=True):
         user_profiles, _ = Profile.objects.get_or_create(user=self.instance)
-        for field in self.Meta.user_profile_fields:
+        for field in self.Meta.profile_fields:
             setattr(user_profiles, field, self.cleaned_data.get(field))
         if not user_profiles.avatar:
             user_profiles.avatar = None
@@ -79,7 +79,7 @@ class UserChangeForm(forms.ModelForm):
     class Meta:
         model = User
         fields = ['first_name', 'last_name', 'email', 'avatar']
-        user_profile_fields = ['first_name','last_name', 'avatar']
+        profile_fields = ['avatar']
         labels = {'first_name': 'Имя', 'last_name': 'Фамилия', 'email': 'Email', 'avatar': 'Фото пользователя'}
 
 

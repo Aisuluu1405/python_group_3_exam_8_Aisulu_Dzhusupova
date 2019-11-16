@@ -55,3 +55,5 @@ class ReviewDeleteView(PermissionRequiredMixin,UserPassesTestMixin, DeleteView):
 
     def get_success_url(self):
         return reverse('webapp:service_detail', kwargs={'pk': self.object.service.pk})
+
+

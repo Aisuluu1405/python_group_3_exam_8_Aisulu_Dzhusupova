@@ -28,7 +28,7 @@ class ServicesView(DetailView):
         return context
 
     def paginate_reviews_to_context(self, reviews, context):
-        paginator = Paginator(reviews, 3, 0)
+        paginator = Paginator(reviews, 5, 0)
         page_number = self.request.GET.get('page', 1)
         page = paginator.get_page(page_number)
         context['paginator'] = paginator

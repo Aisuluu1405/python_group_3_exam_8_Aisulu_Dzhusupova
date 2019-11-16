@@ -2,7 +2,7 @@
 {% load static %}
 {% block title %}{{ services.name }}{% endblock %}
 {% block menu %}
-    {% if perms.webapp.changes_services %}
+    {% if perms.webapp.change_services %}
         <li class="nav-item"><a href="{% url 'webapp:service_edit' services.pk %}" class="nav-link">Редактировать услугу</a></li>
     {% endif %}
     {% if perms.webapp.delete_services %}
@@ -23,6 +23,7 @@
         </div>
         <p><b>Категория:</b> {{ services.get_category_display }}</p>
         <p><b>Описание:</b> {{ services.description }}</p>
+        <div><b>Средняя оценка:</b> {{services.average }} </div>
     <h3><b>Отзывы для услуги:</b></h3>
     {% if is_paginated %}
         {% include 'partial/pagination.html' %}
@@ -34,25 +35,28 @@
                 <p><b>Email: </b>{{ review.author.email }}</p>
                 <div class="pre"><b>Отзыв: </b> {{ review.text }}</div>
                 <div><b>Оценка:</b> {{ review.rating }} из возможных 5</div>
-                <hr>
 
-            {% if review.author == request.user%}
+             {% if review.author == request.user%}
                 <p class="review-links">
                     {% if perms.webapp.change_review %}
-                        <a href="{% url 'webapp:review_update' review.pk %}">Редактировать</a>
+                        <a href="{% url 'webapp:review_update' review.pk %}" class="btn btn-primary">Редактировать</a>
                     {% endif %}
                     {% if perms.webapp.delete_review %}
-                        <a href="{% url 'webapp:review_delete' review.pk %}">Удалить</a>
+                        <a href="{% url 'webapp:review_delete' review.pk %}" class="btn btn-primary">Удалить</a>
                     {% endif %}
                 </p>
             {% endif %}
+            <hr>
+
+
             </div>
         {% empty %}
             <p>Нет еще отзывов.</p>
         {% endfor %}
     </div>
+
         {% if request.user.is_authenticated %}
-            <p><a href="{% url "webapp:review_create" services.pk %}">Добавить отзыв</a></p>
+            <p><a href="{% url "webapp:review_create" services.pk %}" class="btn btn-primary">Добавить отзыв</a></p>
     {% endif %}
     </div>
 {% endblock %}

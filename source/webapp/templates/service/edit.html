@@ -3,8 +3,7 @@
 {% block content %}
     <h1 class="text-center">Редактировать услугу</h1>
     <form action="{% url "webapp:service_edit" services.pk%}" method="POST" enctype="multipart/form-data">
-        {% include 'partial/form.html' %}
-        <input type="submit" value="Редактировать" class="btn btn-primary">
+        {% include 'partial/form.html' with button_text='Редактировать' %}
     </form>
 {% endblock %}
 

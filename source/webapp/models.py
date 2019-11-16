@@ -1,5 +1,3 @@
-# from django.conf import settings
-# from django.contrib.auth.models import User
 from django.contrib.auth.models import User
 from django.db import models
 
@@ -22,6 +20,19 @@ class Services(models.Model):
 
     def __str__(self):
         return self.name
+
+    def average(self):
+        ratings = Review.objects.filter(service=self.pk)
+        count = 0
+        for rating in ratings:
+            count += rating.rating
+        try:
+            rating_average = count / len(ratings)
+            rating_average = round(rating_average, 1)
+        except ZeroDivisionError:
+            rating_average = 'Нет оценки'
+
+        return rating_average
 
     class Meta:
         verbose_name = 'Услуга'
