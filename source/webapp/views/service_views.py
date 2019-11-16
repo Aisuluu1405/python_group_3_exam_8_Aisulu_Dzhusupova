@@ -2,7 +2,7 @@ from django.contrib.auth.mixins import PermissionRequiredMixin, LoginRequiredMix
 from django.shortcuts import reverse, redirect
 from django.urls import reverse_lazy
 
-from django.views.generic import ListView, DetailView, CreateView, UpdateView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from webapp.models import Services
 
 
@@ -35,3 +35,13 @@ class ServicesEditView(UpdateView):
 
     def get_success_url(self):
         return reverse('webapp:index')
+
+
+class ServicesDeleteView(DeleteView):
+    model = Services
+    template_name = 'service/delete.html'
+    context_object_name = 'services'
+    success_url = reverse_lazy('webapp:index')
+    # permission_required = 'webapp.delete_services'
+    # permission_denied_message = 'Access is denied!'
+
