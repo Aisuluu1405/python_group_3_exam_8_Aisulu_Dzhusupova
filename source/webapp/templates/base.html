@@ -46,13 +46,13 @@
   </div>
 </nav>
 
-
-
 <div class="container">
     {% block content %}{% endblock %}
 </div>
+{% block scripts %}
     <script src="{% static 'js/jquery-3.3.1.slim.min.js' %}"></script>
     <script src="{% static 'js/popper.min.js' %}"></script>
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
+{% endblock %}
 </body>
 </html>

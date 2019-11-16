@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block title %}Услуги{% endblock %}
+{% block menu %}
+{#    {% if perms.webapp.add_services %}#}
+        <li class="nav-item"><a href="{% url 'webapp:service_create' %}" class="nav-link">Добавить услугу</a></li>
+{#    {% endif %}#}
+{% endblock %}
+{% block content %}
+    <h1 class="text-center">Услуги</h1>
+    <div class="row">
+        {% for services in services_list%}
+            <div class="col col-3">
+                <div class="card">
+
+                    <img src="{{ services.photo.url }}" class="card-img-top" alt="{{ services.name }}">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ services.name }}</h5>
+                        <p class="card-text">{{ services.get_category_display }}</p>
+                        <a href="{% url "webapp:service_detail" services.pk %}"
+                           class="btn btn-primary">Посмотреть</a>
+
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
