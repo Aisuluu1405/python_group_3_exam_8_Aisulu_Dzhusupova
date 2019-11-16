@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}{{ user_obj.username }}{% endblock %}
+
+{% block menu %}
+{% if user_obj == request.user %}
+{#        <li class="nav-item ml-3 mr-3"><a class="nav-link font-weight-bolder text-danger" href="{% url "accounts:user_edit" user_obj.pk %}">Редактировать</a></li>#}
+{#        <li class="nav-item ml-3 mr-3"><a class="nav-link font-weight-bolder text-danger" href="{% url 'accounts:password_change' user_obj.pk %}">Смена пароля</a></li>#}
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+    <h1>Profile: {{ user_obj.username }}</h1>
+    {% if user_obj.user_profiles.avatar %}
+        <img class="avatar" src="{{ user_obj.user_profiles.avatar.url }}" alt="user picture">
+    {% else %}
+        <img class="avatar" src="{% static "default-avatar.jpg" %}" alt="No avatar!" />
+    {% endif %}
+    <p>First Name: <b>{{ user_obj.first_name }}</b></p>
+    <p>Last Name: <b>{{ user_obj.last_name }}</b></p>
+    <p>Email: <b>{{ user_obj.email }}</b></p>
+{% endblock %}

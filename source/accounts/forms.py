@@ -4,10 +4,10 @@ from django.core.exceptions import ValidationError
 
 
 class UserCreationForm(forms.ModelForm):
+    username = forms.CharField(max_length=100, label='Username', required=True)
     password = forms.CharField(label='Пароль', strip=False, widget=forms.PasswordInput)
     password_confirm = forms.CharField(label='Подтвердите пароль', widget=forms.PasswordInput, strip=False)
     email = forms.EmailField(label='Email', required=True)
-
 
     def clean_password_confirm(self):
         password = self.cleaned_data.get('password')
@@ -15,6 +15,15 @@ class UserCreationForm(forms.ModelForm):
         if password and password_confirm and password != password_confirm:
             raise forms.ValidationError('Passwords do not match!')
         return password_confirm
+
+    def clean_email(self):
+        email = self.cleaned_data.get('email')
+        try:
+            User.objects.get(email=email)
+            raise ValidationError('User with this email already exists',
+                                  code='user_email_exists')
+        except User.DoesNotExist:
+            return email
 
     def save(self, commit=True):
         user = super().save(commit=False)
@@ -34,5 +43,5 @@ class UserCreationForm(forms.ModelForm):
 
     class Meta:
         model = User
-        fields = ['username', 'password', 'password_confirm', 'first_name', 'last_name', 'email']
+        fields = ['username', 'password', 'password_confirm', 'email']
 

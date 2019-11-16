@@ -34,7 +34,7 @@
 
     {% block menu %} {% endblock %}
         {% if request.user.is_authenticated %}
-            <li class="nav-item ml-5 mr-3"><a class="nav-link font-weight-bolder text-danger" href="">Hello, {{ request.user }}!</a></li>
+            <li class="nav-item ml-5 mr-3"><a class="nav-link font-weight-bolder text-danger" href="{% url 'accounts:user_detail' request.user.pk  %}">Hello, {{ request.user }}!</a></li>
             <li class="nav-item ml-5 mr-3"><a class="nav-link font-weight-bolder text-danger" href="{% url 'accounts:logout' %}">Log Out</a></li>
         {% else %}
             <li class="nav-item ml-5 mr-3"><a class="nav-link font-weight-bolder text-danger" href="{% url 'accounts:login' %}">Log In</a></li>
