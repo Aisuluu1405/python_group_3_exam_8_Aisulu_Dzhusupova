@@ -23,7 +23,7 @@ class ReviewForServiceCreateView(CreateView):
         return redirect('webapp:service_detail', pk=services_pk)
 
 
-class ReviewEditView(PermissionRequiredMixin,UpdateView):
+class ReviewEditView(PermissionRequiredMixin,UserPassesTestMixin, UpdateView):
     model = Review
     template_name = 'review/edit.html'
     form_class = ServiceReviewForm
@@ -31,14 +31,24 @@ class ReviewEditView(PermissionRequiredMixin,UpdateView):
     permission_required = 'webapp.change_review'
     permission_denied_message = "Доступ запрещен!"
 
+    def test_func(self):
+        review_pk = self.kwargs.get('pk')
+        review = Review.objects.get(pk=review_pk)
+        return self.request.user == review.author or self.request.user.has_perm('webapp.change_review')
+
     def get_success_url(self):
         return reverse('webapp:service_detail', kwargs={'pk': self.object.services.pk})
 
 
-class ReviewDeleteView(PermissionRequiredMixin, DeleteView):
+class ReviewDeleteView(PermissionRequiredMixin,UserPassesTestMixin, DeleteView):
     model = Review
     permission_required = 'webapp.delete_review'
     permission_denied_message = "Доступ запрещен!"
+
+    def test_func(self):
+        review_pk = self.kwargs.get('pk')
+        review = Review.objects.get(pk=review_pk)
+        return self.request.user == review.author or self.request.user.has_perm('webapp.delete_review')
 
     def get(self, request, *args, **kwargs):
         return self.delete(request, *args, **kwargs)
