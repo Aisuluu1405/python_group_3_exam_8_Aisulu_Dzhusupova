@@ -22,3 +22,22 @@ class ReviewForServiceCreateView(CreateView):
         services.service_review.create(author=self.request.user, **form.cleaned_data)
         return redirect('webapp:service_detail', pk=services_pk)
 
+
+class ReviewEditView(UpdateView):
+    model = Review
+    template_name = 'review/edit.html'
+    form_class = ServiceReviewForm
+    context_object_name = 'review'
+
+    def get_success_url(self):
+        return reverse('webapp:service_detail', kwargs={'pk': self.object.service.pk})
+
+
+class ReviewDeleteView(DeleteView):
+    model = Review
+
+    def get(self, request, *args, **kwargs):
+        return self.delete(request, *args, **kwargs)
+
+    def get_success_url(self):
+        return reverse('webapp:service_detail', kwargs={'pk': self.object.service.pk})

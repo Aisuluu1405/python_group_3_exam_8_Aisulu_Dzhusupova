@@ -22,20 +22,22 @@
         <p><b>Категория:</b> {{ services.get_category_display }}</p>
         <p><b>Описание:</b> {{ services.description }}</p>
     <h3><b>Отзывы для услуги:</b></h3>
-{#    {% if is_paginated %}#}
-{#        {% include 'partial/pagination.html' %}#}
-{#    {% endif %}#}
+    {% if is_paginated %}
+        {% include 'partial/pagination.html' %}
+    {% endif %}
     <div class="review-list">
         {% for review in reviews %}
             <div class="review">
-                <p class="text-danger mt-4">{{ review.author }}</p>
-                <div class="pre">{{ review.text }}</div>
+                <p><b>{{ forloop.counter }}. {{ review.author.username }}</b></p>
+                <p><b>Email: </b>{{ review.author.email }}</p>
+                <div class="pre"><b>Отзыв: </b> {{ review.text }}</div>
+                <div><b>Rating:</b> {{ review.rating }} из возможных 5</div>
                 <hr>
 
             {% if review.author == request.user%}
                 <p class="review-links">
-{#                    <a href="{% url 'webapp:review_update' review.pk %}">Редактировать</a>#}
-{#                    <a href="{% url 'webapp:review_delete' review.pk %}">Удалить</a>#}
+                    <a href="{% url 'webapp:review_update' review.pk %}">Редактировать</a>
+                    <a href="{% url 'webapp:review_delete' review.pk %}">Удалить</a>
                 </p>
             {% endif %}
             </div>
@@ -44,9 +46,8 @@
         {% endfor %}
     </div>
         {% if request.user.is_authenticated %}
-        <h4><b>Добавить новый отзыв:</b></h4>
             <p><a href="{% url "webapp:review_create" services.pk %}">Добавить отзыв</a></p>
-
     {% endif %}
     </div>
 {% endblock %}
+
