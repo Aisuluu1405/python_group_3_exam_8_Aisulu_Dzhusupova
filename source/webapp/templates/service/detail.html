@@ -5,7 +5,7 @@
 {#{% if perms.webapp.changes_services %}#}
         <li class="nav-item"><a href="{% url 'webapp:service_edit' services.pk %}" class="nav-link">Редактировать услугу</a></li>
 {#    {% endif %}#}
-    <li class="nav-item"><a href="{% url 'webapp:service_delete' services.pk %}" class="nav-link">Удалить услугу</a></li>
+        <li class="nav-item"><a href="{% url 'webapp:service_delete' services.pk %}" class="nav-link">Удалить услугу</a></li>
 {% endblock %}
 {% block content %}
     <div class="text-center">
@@ -21,6 +21,32 @@
         </div>
         <p><b>Категория:</b> {{ services.get_category_display }}</p>
         <p><b>Описание:</b> {{ services.description }}</p>
+    <h3><b>Отзывы для услуги:</b></h3>
+{#    {% if is_paginated %}#}
+{#        {% include 'partial/pagination.html' %}#}
+{#    {% endif %}#}
+    <div class="review-list">
+        {% for review in reviews %}
+            <div class="review">
+                <p class="text-danger mt-4">{{ review.author }}</p>
+                <div class="pre">{{ review.text }}</div>
+                <hr>
 
+            {% if review.author == request.user%}
+                <p class="review-links">
+{#                    <a href="{% url 'webapp:review_update' review.pk %}">Редактировать</a>#}
+{#                    <a href="{% url 'webapp:review_delete' review.pk %}">Удалить</a>#}
+                </p>
+            {% endif %}
+            </div>
+        {% empty %}
+            <p>Нет еще отзывов.</p>
+        {% endfor %}
+    </div>
+        {% if request.user.is_authenticated %}
+        <h4><b>Добавить новый отзыв:</b></h4>
+            <p><a href="{% url "webapp:review_create" services.pk %}">Добавить отзыв</a></p>
+
+    {% endif %}
     </div>
 {% endblock %}
